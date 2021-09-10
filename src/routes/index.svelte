@@ -6,16 +6,7 @@
 	import Chip from 'svelte-materialify/src/components/Chip/Chip.svelte';
 	import { Row, Col } from 'svelte-materialify/src/components/Grid';
 
-	async function callApi(uri: string, opt : any = {}) {
-		const res = await fetch(uri, opt);
-		if (res.ok) {
-			const obj = await res.json();
-			console.log(obj);
-			return obj
-		}
-		const text = await res.text();
-		throw new Error(text);
-	}
+	import { callApi } from '$lib/api';
 	let sess = getSess();
 	let stats = getStats();
 	let tasks = getTasks();

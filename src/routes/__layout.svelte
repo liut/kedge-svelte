@@ -14,7 +14,7 @@
 </main>
 
 <footer>
-	footer
+	<!-- footer -->
 </footer>
 
 </MaterialAppMin>
