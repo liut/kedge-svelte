@@ -1,0 +1,38 @@
+import dayjs from 'dayjs'
+export default {
+  formatSeconds (second : number) : string {
+    const oneHour = 60 * 60
+    const oneDay = oneHour * 24
+    return [
+      parseInt(second / oneDay) ? parseInt(second / oneDay) + 'd' : '',
+      parseInt(second % oneDay / oneHour) ? parseInt(second % oneDay / oneHour) + 'h' : '',
+      parseInt(second % oneHour / 60) ? parseInt(second % oneHour / 60) + 'min' : '',
+      parseInt(second % 60) ? parseInt(second % 60) + 's' : ''
+    ]
+      .join('')
+      .replace(/\b(\d)\b/g, '0$1') // 自动补零
+      .replace(/(\s00\s([^\s]+))?/g, '') // 移除 00 时间
+  },
+  formatTime (nS : number, format  = 'YYYY-MM-DD hh:mm:ss') : string {
+    return dayjs(nS).format(format)
+  },
+  formatBytes: (n : number, d : number = 1) : string => {
+    // set defaults
+    if (typeof n !== 'number' || isNaN(n) || n == 0) return '0 B'
+
+    if (!d || typeof d !== 'number') d = 1
+    // set scale index 1000,100000,... becomes 1,2,...
+    const i = Math.floor(Math.floor(Math.log(n) * Math.LOG10E) / 3)
+    // set rounding factor
+    const f = Math.pow(10, d)
+    // scale n down and round
+    const s = Math.round(n / Math.pow(10, i * 3) * f) / f
+    // concat (no trailing 0s) and choose scale letter
+    return (
+      s.toString().replace(/\.0+$/, '') +
+      ' ' +
+      ['', 'K', 'M', 'G', 'T', 'P', 'Z'][i] +
+      'B'
+    )
+  }
+}

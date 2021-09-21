@@ -9,6 +9,18 @@ export async function callApi(uri: string, opt?: any = {}): Promise<any> {
   throw new Error(text);
 }
 
+export async function getSess(): Promise<any> {
+  return await callApi('/api/sess');
+}
+
+export async function getStats(): Promise<any> {
+  return await callApi('/api/stats');
+}
+
+export async function getTasks(): Promise<any> {
+  return await callApi('/api/torrents');
+}
+
 export async function uploadFile(uri: string, file:File, opt?: any = {}): Promise<boolean> {
   const headers = {};
   if (opt.savePath) {

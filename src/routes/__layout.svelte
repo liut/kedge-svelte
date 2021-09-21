@@ -4,6 +4,12 @@
 	import '../app.css';
 
 	import { theme } from '$stores/theme';
+	import { onMount } from 'svelte';
+	import syncStore from '$stores/sync';
+
+	onMount(async () => {
+		syncStore.v();
+	});
 </script>
 
 <MaterialAppMin theme="{$theme}">
