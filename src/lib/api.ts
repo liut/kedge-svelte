@@ -21,6 +21,14 @@ export async function getTasks(): Promise<any> {
   return await callApi('/api/torrents');
 }
 
+export async function deleteTorrent(hash:string, withData: false): Promise<any> {
+  let uri = '/api/torrent/'+hash
+  if (withData) uri += "/with_data"
+  return await callApi(uri, {
+    method: 'DELETE'
+  });
+}
+
 export async function uploadFile(uri: string, file:File, opt?: any = {}): Promise<boolean> {
   const headers = {};
   if (opt.savePath) {

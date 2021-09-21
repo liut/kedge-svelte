@@ -1,6 +1,6 @@
 
 import utils from '$lib/util';
-import velox from 'veloxjs/js/client/velox';
+import velox from 'veloxjs/js/client/velox.js';
 import { writable } from 'svelte/store';
 
 const syncData = writable({});
@@ -33,7 +33,7 @@ function formatStatus(state: number) : string {
 function formatTasks(tasks) : void {
   if (!tasks) return;
   tasks.map((t : unknown) : void => {
-    t.prettyBytes = utils.formatBytes(t.total_wanted);
+    t.prettyTotal = utils.formatBytes(t.total_wanted);
     t.prettyCompleted = utils.formatBytes(t.total_done);
     t.prettyRateRecv = utils.formatBytes(t.rates);
     t.syncStatus = formatStatus(t.state);
