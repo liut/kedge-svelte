@@ -1,20 +1,14 @@
-# create-svelte
+# kedge-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+A webui for kedge.
 
-## Creating a project
+## Features
+* List all torrents
+* Realtime sync stats of torrents
+* Delelet a torrent (with data optional)
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
-```
-
-> Note: the `@next` is temporary
+## TODO
+* Post a torrent file to add
 
 ## Developing
 
