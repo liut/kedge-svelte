@@ -1,29 +1,39 @@
 <script lang="ts">
-	import MaterialAppMin from 'svelte-materialify/src/components/MaterialApp/MaterialAppMin.svelte';
+	import MaterialApp from 'svelte-materialify/src/components/MaterialApp/MaterialApp.svelte';
+	import Footer from 'svelte-materialify/src/components/Footer/Footer.svelte';
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
 
 	import { theme } from '$stores/theme';
 	import { onMount } from 'svelte';
 	import syncStore from '$stores/sync';
+  import utils from '$lib/util';
+
+	let uptime = 0
 
 	onMount(async () => {
 		syncStore.v();
+		syncStore.subscribe(res => {
+			uptime = res.stats.uptime || 0
+		})
 	});
 </script>
 
-<MaterialAppMin theme="{$theme}">
+<MaterialApp theme="{$theme}">
 <Header />
 
 <main>
 	<slot />
 </main>
 
-<footer>
-	<!-- footer -->
-</footer>
+<Footer fixed padless class=" justify-center flex-column">
+  <div class=" pa-2 text-center">
+    2021 -
+    <b>kedge by liut, uptime: {utils.formatSeconds(uptime)}</b>
+  </div>
+</Footer>
 
-</MaterialAppMin>
+</MaterialApp>
 
 <style>
 	main {
@@ -37,17 +47,4 @@
 		box-sizing: border-box;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 40px;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 40px 0;
-		}
-	}
 </style>
