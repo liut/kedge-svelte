@@ -14,7 +14,7 @@
 	onMount(async () => {
 		syncStore.v();
 		syncStore.subscribe(res => {
-			uptime = res.stats.uptime || 0
+			if(res.stats && res.stats.uptime) uptime = res.stats.uptime || 0
 		})
 	});
 </script>

@@ -3,11 +3,16 @@ export default {
   formatSeconds (second : number) : string {
     const oneHour = 60 * 60
     const oneDay = oneHour * 24
+    const days = parseInt(second / oneDay)
+    const hours = parseInt(second % oneDay / oneHour)
+    const minuts = parseInt(second % oneHour / 60)
+    const seconds = parseInt(second % 60)
+    const zeroPad = (num, places) => String(num).padStart(places, '0')
     return [
-      parseInt(second / oneDay) ? parseInt(second / oneDay) + 'd' : '',
-      parseInt(second % oneDay / oneHour) ? parseInt(second % oneDay / oneHour) + 'h' : '',
-      parseInt(second % oneHour / 60) ? parseInt(second % oneHour / 60) + 'min' : '',
-      parseInt(second % 60) ? parseInt(second % 60) + 's' : ''
+      days ? days + 'd ' : '',
+      hours ? zeroPad(hours, 2) + ':' : '00',
+      minuts ? zeroPad(minuts, 2) + ':' : '00',
+      seconds ? zeroPad(seconds, 2) + '' : '00'
     ]
       .join('')
       .replace(/\b(\d)\b/g, '0$1') // 自动补零
