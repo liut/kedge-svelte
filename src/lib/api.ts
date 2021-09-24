@@ -9,12 +9,12 @@ export async function callApi(uri: string, opt?: any = {}): Promise<any> {
   throw new Error(text);
 }
 
-export async function getSess(): Promise<any> {
-  return await callApi('/api/sess');
+export async function getSessionInfo(): Promise<any> {
+  return await callApi('/api/session/info');
 }
 
-export async function getStats(): Promise<any> {
-  return await callApi('/api/stats');
+export async function getSessionStats(): Promise<any> {
+  return await callApi('/api/session/stats');
 }
 
 export async function getTasks(): Promise<any> {
