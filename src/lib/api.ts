@@ -29,6 +29,16 @@ export async function deleteTorrent(hash:string, withData: false): Promise<any> 
   });
 }
 
+export async function getTaskFiles(hash:string): Promise<any> {
+  const uri = '/api/torrent/'+hash+'/files'
+  return await callApi(uri)
+}
+
+export async function getTaskPeers(hash:string): Promise<any> {
+  const uri = '/api/torrent/'+hash+'/peers'
+  return await callApi(uri)
+}
+
 export async function uploadFile(uri: string, file:File, opt?: any = {}): Promise<boolean> {
   const headers = {};
   if (opt.savePath) {
