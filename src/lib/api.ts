@@ -21,7 +21,7 @@ export async function getTasks(): Promise<any> {
   return await callApi('/api/torrents');
 }
 
-export async function deleteTorrent(hash:string, withData: false): Promise<any> {
+export async function deleteTask(hash:string, withData: false): Promise<any> {
   let uri = '/api/torrent/'+hash
   if (withData) uri += "/with_data"
   return await callApi(uri, {

@@ -22,8 +22,8 @@
 	function closeDeleteDialog(): void {
 		isDeletingDialog = false
 	}
-	function callDeleteTorrent() : void {
-		api.deleteTorrent(currTask.info_hash, deleteWithData).then((res) => {
+	function calldeleteTask() : void {
+		api.deleteTask(currTask.info_hash, deleteWithData).then((res) => {
 			console.log(res.status)
 		})
 		closeDeleteDialog()
@@ -69,7 +69,7 @@
     </CardText>
     <CardActions>
       <Button on:click={closeDeleteDialog} text>Cancel</Button>
-      <Button on:click={e => callDeleteTorrent()} text class="red-text">Yes. delete it!</Button>
+      <Button on:click={e => calldeleteTask()} text class="red-text">Yes. delete it!</Button>
     </CardActions>
   </Card>
 </Dialog>
