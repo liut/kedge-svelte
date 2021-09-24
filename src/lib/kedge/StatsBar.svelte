@@ -11,7 +11,12 @@
 
 <p class="d-flex">
 {#if stats}
-  <Chip>task count: {stats.taskCount || 0}</Chip>
+  <Chip>task count: {stats.taskCount || 0}
+    {#if stats.hasIncoming}
+     +
+    {:else}
+     .
+  {/if}</Chip>
   <Chip><span title="num peers connected">PC: {stats.numPeersConnected || 0}</span></Chip>
   <Chip><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
   <Chip><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}</span></Chip>
