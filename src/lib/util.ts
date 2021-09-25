@@ -10,8 +10,8 @@ export default {
     const zeroPad = (num, places) => String(num).padStart(places, '0')
     return [
       days ? days + 'd ' : '',
-      hours ? zeroPad(hours, 2) + ':' : '00',
-      minuts ? zeroPad(minuts, 2) + ':' : '00',
+      hours ? zeroPad(hours, 2) + ':' : '00:',
+      minuts ? zeroPad(minuts, 2) + ':' : '00:',
       seconds ? zeroPad(seconds, 2) + '' : '00'
     ]
       .join('')
