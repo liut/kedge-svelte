@@ -35,19 +35,19 @@
 
 <Row>
 	<Col>Name</Col>
-	<Col cols={12} sm={1} md={1} lg={2}>Size</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">Size</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>Progress</Col>
-	<Col cols={12} sm={1} md={1} lg={2}>state</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">state</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>conn.</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>act.</Col>
 </Row>
 {#each tasks as task}
 <Row >
 	<Col>{task.name}</Col>
-	<Col cols={12} sm={1} md={1} lg={2}>{task.prettyTotal}</Col>
-	<Col cols={12} sm={1} md={1} lg={1}>{task.progress*100}%</Col>
-	<Col cols={12} sm={1} md={1} lg={2}>{task.syncStatus}</Col>
-	<Col cols={12} sm={1} md={1} lg={1}>{task.num_connections || 0}</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
+	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{task.progress_ppm/10000}%</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}</Col>
+	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{task.num_connections || 0}</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>
 		<Button icon on:click={e => showDeleteDialog(task)}>
 			<Icon path={iconDelete} />
