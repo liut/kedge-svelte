@@ -11,24 +11,26 @@
 
 <p class="d-flex">
 {#if stats}
-  <Chip>task count: {stats.taskCount || 0}
+  <Badge class="primary-color" bordered value={stats.numDownloading || 0} offsetX={16} offsetY={16}>
+    <Chip class="ma-1"><span class="icon"><FaDownload /></span></Chip>
+  </Badge>
+
+  <Badge class="primary-color" bordered value={stats.numSeeding || 0} offsetX={16} offsetY={16}>
+    <Chip class="ma-1"><span class="icon"><FaUpload /></span></Chip>
+  </Badge>
+
+  <Chip class="ma-2">task count: {stats.taskCount || 0}
     {#if stats.hasIncoming}
      +
     {:else}
      .
   {/if}</Chip>
-  <Chip><span title="num peers connected">PC: {stats.numPeersConnected || 0}</span></Chip>
-  <Chip><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
-  <Chip><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}</span></Chip>
-  <Chip><span title="upload rate">S: {utils.formatBytes(stats.rateSent || 0)}</span></Chip>
-
-  <Badge class="primary-color" bordered value={stats.numDownloading || 0} offsetX={16} offsetY={16}>
-    <Chip><span class="icon"><FaDownload /></span></Chip>
-  </Badge>
-
-  <Badge class="primary-color" bordered value={stats.numSeeding || 0} offsetX={16} offsetY={16}>
-    <Chip><span class="icon"><FaUpload /></span></Chip>
-  </Badge>
+  <Chip class="ma-1"><span title="num peers connected">PC: {stats.numPeersConnected || 0}</span></Chip>
+  <Chip class="ma-1"><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
+  <Chip class="ma-1"><span title="queued bytes">Q: {utils.formatBytes(stats.bytesQueued || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="wasted bytes">W: {utils.formatBytes(stats.bytesWasted || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="upload rate">S: {utils.formatBytes(stats.rateSent || 0)}</span></Chip>
 
 {:else}
   loading...
