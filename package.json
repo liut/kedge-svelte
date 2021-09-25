@@ -11,6 +11,8 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@mdi/font": "^6.1.95",
+    "@mdi/js": "^6.1.95",
     "@sveltejs/adapter-static": "^1.0.0-next.18",
     "@sveltejs/kit": "next",
     "@types/cookie": "^0.4.0",
@@ -24,7 +26,7 @@
     "postcss": "^8.3.6",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "sass": "^1.39.0",
+    "sass": "~1.32.13",
     "svelte": "^3.38.3",
     "svelte-check": "^2.0.0",
     "svelte-materialify": "^0.3.11",
