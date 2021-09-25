@@ -2,12 +2,16 @@
 
 A webui for kedge.
 
+![screen.png](static/screen.png)
+
 ## Features
+
 * List all torrents
 * Realtime sync stats of torrents
 * Delelet a torrent (with data optional)
 
 ## TODO
+
 * Post a torrent file to add
 
 ## Developing
