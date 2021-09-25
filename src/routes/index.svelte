@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Kedge</title>
 </svelte:head>
 
 <section>
@@ -35,15 +35,8 @@
   </Row>
 	<TasksTable tasks={stateData.torrents} />
 
-	</section>
+</section>
 
 
 <style>
-  .icon {
-    width: 1.2em;
-    height: 1.2em;
-  }
-	.s-chip {
-		padding: .1em .8em;
-	}
 </style>
