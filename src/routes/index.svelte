@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import { Row, Col } from 'svelte-materialify/src/components/Grid';
+	// import { Row, Col } from 'svelte-materialify/src/components/Grid';
 	import StatsBar from "$lib/kedge/StatsBar.svelte";
 	import TasksTable from "$lib/kedge/TasksTable.svelte";
 	import { onMount } from 'svelte';
@@ -28,11 +28,7 @@
 </svelte:head>
 
 <section>
-  <Row >
-    <Col>
-				<StatsBar stats="{stateData.stats}" />
-	  </Col>
-  </Row>
+	<StatsBar stats="{stateData.stats}" />
 	<TasksTable tasks={stateData.torrents} />
 
 </section>

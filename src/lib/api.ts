@@ -40,9 +40,9 @@ export async function getTaskPeers(hash:string): Promise<any> {
 }
 
 export async function uploadFile(uri: string, file:File, opt?: any = {}): Promise<boolean> {
-  const headers = {};
+  const headers = new Headers;
   if (opt.savePath) {
-    headers['x-save-path'] = opt.savePath;
+    headers.append('x-save-path', opt.savePath)
   }
   const request = new Request(uri, {
     method: "POST",
@@ -62,4 +62,8 @@ export async function uploadFile(uri: string, file:File, opt?: any = {}): Promis
   }
   const text = await res.text();
   throw new Error(text);
+}
+
+export async function uploadTorrent(file:File, opt?: any): Promise<boolean> {
+  return uploadFile('/api/torrents', file, opt)
 }

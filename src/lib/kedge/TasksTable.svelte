@@ -6,9 +6,12 @@
 	import Button from 'svelte-materialify/src/components/Button/Button.svelte';
 	import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
 	import iconDelete from '$lib/icons/delete';
+	import iconFileTable from '$lib/icons/file-table';
 	import * as api from '$lib/api';
+  import utils from '$lib/util';
 
 	let isDeletingDialog = false
+	let isTaskFilesDialog = false
 	let currTask = {}
 	let deleteWithData = false;
 
@@ -22,11 +25,15 @@
 	function closeDeleteDialog(): void {
 		isDeletingDialog = false
 	}
-	function calldeleteTask() : void {
+	function callDeleteTask() : void {
 		api.deleteTask(currTask.info_hash, deleteWithData).then((res) => {
 			console.log(res.status)
 		})
 		closeDeleteDialog()
+	}
+
+	function showFilesDialog(task:any): void {
+
 	}
 
 </script>
@@ -43,9 +50,13 @@
 </Row>
 {#each tasks as task}
 <Row >
-	<Col>{task.name}</Col>
+	<Col>{task.name}
+		<Button icon size="small" on:click={e => showFilesDialog(task)}>
+			<Icon path="{iconFileTable}" size="16px" />
+		</Button>
+	</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
-	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{task.progress_ppm/10000}%</Col>
+	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{task.num_connections || 0}</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>
@@ -69,7 +80,11 @@
     </CardText>
     <CardActions>
       <Button on:click={closeDeleteDialog} text>Cancel</Button>
-      <Button on:click={e => calldeleteTask()} text class="red-text">Yes. delete it!</Button>
+      <Button on:click={e => callDeleteTask()} text class="red-text">Yes. delete it!</Button>
     </CardActions>
   </Card>
+</Dialog>
+
+<Dialog bind:active={isTaskFilesDialog}>
+	
 </Dialog>

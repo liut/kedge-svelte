@@ -39,5 +39,9 @@ export default {
       ['', 'K', 'M', 'G', 'T', 'P', 'Z'][i] +
       'B'
     )
+  },
+  formatPecent(x: number|string): number {
+    if (typeof x === 'number') return x.toFixed(2);
+    return Number.parseFloat(x).toFixed(2);
   }
 }
