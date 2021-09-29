@@ -1,6 +1,6 @@
 # kedge-svelte
 
-A webui for kedge.
+A webui for Kedge.
 
 ![screen.png](static/screen-w39.png)
 
@@ -13,7 +13,9 @@ A webui for kedge.
 
 ## TODO
 
-* Add support magnet
+* Show torrent Files and Peers
+* Pause and resume a task
+* Add support magnet link
 * General configurability
 
 ## Developing
