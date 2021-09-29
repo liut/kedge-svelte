@@ -1,6 +1,6 @@
 
 import utils from '$lib/util';
-import velox from 'veloxjs/js/client/velox.js';
+import velox from '$lib/velox/velox.js';
 import { writable } from 'svelte/store';
 
 const syncData = writable({});
@@ -62,6 +62,9 @@ function vInstance() : void {
       // formatSys(syncObj.sys);
       syncData.set(syncObj);
     };
+    v.onerror = (e, err) => {
+      console.log('velox error', e, err)
+    }
   }
 }
 
