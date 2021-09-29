@@ -1,15 +1,42 @@
 <script lang="ts">
+	import { Row, Col } from 'svelte-materialify/src/components/Grid';
 	import Chip from 'svelte-materialify/src/components/Chip/Chip.svelte';
 	import Badge from 'svelte-materialify/src/components/Badge/Badge.svelte';
-	// import Button from 'svelte-materialify/src/components/Button/Button.svelte';
+	import Button from 'svelte-materialify/src/components/Button/Button.svelte';
+	import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte';
+	import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
+	import TextField from 'svelte-materialify/src/components/TextField/TextField.svelte';
+	import iconFileUpload from '$lib/icons/file-upload';
 	import FaDownload from '$lib/icons/FaDownload.svelte';
 	import FaUpload from '$lib/icons/FaUpload.svelte';
+	import * as api from '$lib/api';
   import utils from '$lib/util';
 
   export let stats = {};
+
+  let fileInput;
+  let savePath = '';
+  let isAddingDialog = false;
+
+  const showAddingDialog = (e) => {
+    isAddingDialog = true
+  }
+
+	const onFileSelected =(e)=>{
+    const file = e.target.files[0];
+    api.uploadTorrent(file, {savePath}).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+
 </script>
 
-<p class="d-flex">
+<Row >
+  <Col>
+
 {#if stats}
   <Badge class="primary-color" bordered value={stats.numDownloading || 0} offsetX={16} offsetY={16}>
     <Chip class="ma-1"><span class="icon"><FaDownload /></span></Chip>
@@ -19,11 +46,11 @@
     <Chip class="ma-1"><span class="icon"><FaUpload /></span></Chip>
   </Badge>
 
-  <Chip class="ma-2">task count: {stats.taskCount || 0}
+  <Chip class="ma-2">I:
     {#if stats.hasIncoming}
      +
     {:else}
-     .
+     -
   {/if}</Chip>
   <Chip class="ma-1"><span title="num peers connected">PC: {stats.numPeersConnected || 0}</span></Chip>
   <Chip class="ma-1"><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
@@ -35,7 +62,26 @@
 {:else}
   loading...
 {/if}
-</p>
+  </Col>
+  <Col cols={12} sm={1} md={1} lg={1}>
+    <Button icon on:click={showAddingDialog}>
+			<Icon path={iconFileUpload} />
+		</Button>
+
+  </Col>
+</Row>
+
+<Dialog class="pa-4 text-center" bind:active={isAddingDialog}>
+  <TextField outlined bind:value={savePath}>
+    save path
+  </TextField>
+  <Button outlined on:click={() => {fileInput.click();}}>
+    add a file
+  </Button>
+  <input style="display:none" type="file" accept=".torrent" on:change={(e)=>onFileSelected(e)} bind:this={fileInput} >
+
+</Dialog>
+
 
 <style>
   .icon {
