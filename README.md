@@ -9,10 +9,12 @@ A webui for kedge.
 * List all torrents
 * Realtime sync stats of torrents
 * Delelet a torrent (with data optional)
+* Post a torrent file to add
 
 ## TODO
 
-* Post a torrent file to add
+* Add support magnet
+* General configurability
 
 ## Developing
 
