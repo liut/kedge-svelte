@@ -44,7 +44,7 @@
 	<Col>Name</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-center">Size</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>Progress</Col>
-	<Col cols={12} sm={1} md={1} lg={2} class="text-center">state</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">State</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>conn.</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>act.</Col>
 </Row>
@@ -75,7 +75,7 @@
 	<Card>
     <CardTitle>Are you sure you want to delete this task?</CardTitle>
     <CardText>
-			<Checkbox color="red" checked={deleteWithData}> with data files.</Checkbox>
+			<Checkbox color="red" bind:checked={deleteWithData}> with data files.</Checkbox>
       Please note that this operation is not recoverable.
     </CardText>
     <CardActions>
