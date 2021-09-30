@@ -10,11 +10,11 @@ A webui for Kedge.
 * Realtime sync stats of torrents
 * Delelet a torrent (with data optional)
 * Post a torrent file to add
+* Show torrent Files and Peers
 
 ## TODO
 
-* Show torrent Files and Peers
-* Pause and resume a task
+* Pause and resume a torrent task
 * Add support magnet link
 * General configurability
 
