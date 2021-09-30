@@ -40,8 +40,8 @@ export default {
       'B'
     )
   },
-  formatPecent(x: number|string): number {
-    if (typeof x === 'number') return x.toFixed(2);
-    return Number.parseFloat(x).toFixed(2);
+  formatPecent(x: number|string, d = 2): number {
+    if (typeof x === 'number') return x.toFixed(d);
+    return Number.parseFloat(x).toFixed(d);
   }
 }
