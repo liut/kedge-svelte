@@ -12,8 +12,21 @@
 
 	let isDeletingDialog = false
 	let isTaskFilesDialog = false
+	let isTaskPeersDialog = false
 	let currTask = {}
 	let deleteWithData = false;
+	let loadFiles = async () => {
+		if (!currTask || !currTask.info_hash) return []
+		const res = await api.getTaskFiles(currTask.info_hash)
+		return res
+	}
+	let files;
+	let loadPeers = async () => {
+		if (!currTask || !currTask.info_hash) return []
+		const res = await api.getTaskPeers(currTask.info_hash)
+		return res
+	}
+	let peers;
 
   export let tasks = []
 
@@ -33,7 +46,15 @@
 	}
 
 	function showFilesDialog(task:any): void {
+		currTask = task
+		isTaskFilesDialog = true
+		files = loadFiles()
+	}
 
+	function showPeersDialog(task:any): void {
+		currTask = task
+		isTaskPeersDialog = true
+		peers = loadPeers()
 	}
 
 </script>
@@ -58,7 +79,12 @@
 	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}</Col>
-	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{task.num_connections || 0}</Col>
+	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{#if task.num_connections}
+		 <Button text on:click={e => showPeersDialog(task)}>{task.num_connections}</Button>
+	{:else}
+		 <!-- else content here -->
+	{/if}
+	</Col>
 	<Col cols={12} sm={1} md={1} lg={1}>
 		<Button icon on:click={e => showDeleteDialog(task)}>
 			<Icon path={iconDelete} />
@@ -85,6 +111,31 @@
   </Card>
 </Dialog>
 
-<Dialog bind:active={isTaskFilesDialog}>
-	
+<Dialog class="pa-2" bind:active={isTaskFilesDialog}>
+	{#await files}
+	<p>...waiting</p>
+	{:then files}
+		{#each files as file}
+			 <p class="text--secondary">{file.name} {utils.formatBytes(file.size)} {utils.formatPecent(file.progress/10)}%</p>
+		{/each}
+	{:catch error}
+		<p style="color: red">{error.message}</p>
+	{/await}
+</Dialog>
+
+<Dialog class="pa-2" width="620" bind:active={isTaskPeersDialog}>
+	{#await peers}
+	<p>...waiting</p>
+	{:then peers}
+	{#each peers as peer}
+		<Row class="text--secondary" dense>
+		 <Col>{peer.ip}:{peer.port}</Col>
+		 <Col>{peer.client}</Col>
+		 <Col>{utils.formatPecent(peer.progress/10000, 0)}%</Col>
+		 <Col>d{utils.formatBytes(peer.down_speed)} u{utils.formatBytes(peer.up_speed)}</Col>
+		</Row>
+	{/each}
+	{:catch error}
+		<p style="color: red">{error.message}</p>
+	{/await}
 </Dialog>
