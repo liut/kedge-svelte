@@ -80,7 +80,7 @@
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{#if task.num_connections}
-		 <Button text on:click={e => showPeersDialog(task)}>{task.num_connections}</Button>
+		 <Button text on:click={e => showPeersDialog(task)}>{task.num_peers || 0} ({task.num_connections || 0})</Button>
 	{:else}
 		 <!-- else content here -->
 	{/if}
