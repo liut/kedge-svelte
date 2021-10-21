@@ -71,10 +71,12 @@
 </Row>
 {#each tasks as task}
 <Row >
-	<Col>{task.name}
+	<Col>{task.name || task.info_hash}
+		{#if task.total_wanted > 0}
 		<Button icon size="small" on:click={e => showFilesDialog(task)}>
 			<Icon path="{iconFileTable}" size="16px" />
 		</Button>
+		{/if}
 	</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
