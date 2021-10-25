@@ -1,6 +1,9 @@
 export async function callApi(uri: string, opt?: any = {}): Promise<any> {
   const res = await fetch(uri, opt);
   if (res.ok) {
+    if (res.status === 204) {
+      return true
+    }
     const obj = await res.json();
     console.log(obj);
     return obj;
@@ -66,4 +69,19 @@ export async function uploadFile(uri: string, file:File, opt?: any = {}): Promis
 
 export async function uploadTorrent(file:File, opt?: any): Promise<boolean> {
   return uploadFile('/api/torrents', file, opt)
+}
+
+export async function uploadMagnet(uri:string, opt?: any): Promise<any> {
+  const headers = new Headers;
+  if (opt.savePath) {
+    headers.append('x-save-path', opt.savePath)
+  }
+  headers.append('x-magnet-link', 'yes')
+
+  return callApi('/api/torrents',{
+    method: 'POST',
+    headers,
+    body: new Blob([uri], {type: 'binary/octet-stream'}),
+    cache: "no-store"
+  })
 }

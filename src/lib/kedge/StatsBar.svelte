@@ -7,6 +7,7 @@
 	import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
 	import TextField from 'svelte-materialify/src/components/TextField/TextField.svelte';
 	import iconFileUpload from '$lib/icons/file-upload';
+	import iconLink from '$lib/icons/link';
 	import FaDownload from '$lib/icons/FaDownload.svelte';
 	import FaUpload from '$lib/icons/FaUpload.svelte';
 	import * as api from '$lib/api';
@@ -16,16 +17,29 @@
 
   let fileInput;
   let savePath = '';
+  let magnetlink = '';
   let isAddingDialog = false;
 
-  const showAddingDialog = (e) => {
+  const showAddingDialog = (e: Event) => {
     isAddingDialog = true
   }
 
-	const onFileSelected =(e)=>{
+	const onFileSelected =(e: Event)=>{
     const file = e.target.files[0];
     api.uploadTorrent(file, {savePath}).then(res => {
       console.log(res)
+      isAddingDialog = false
+      fileInput.value = ''
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  const onMagnetLinkClick = (e: Event) => {
+    api.uploadMagnet(magnetlink, {savePath}).then(res => {
+      console.log(res)
+      isAddingDialog = false
+      magnetlink = '';
     }).catch(err => {
       console.log(err)
     })
@@ -79,6 +93,14 @@
     add a file
   </Button>
   <input style="display:none" type="file" accept=".torrent" on:change={(e)=>onFileSelected(e)} bind:this={fileInput} >
+
+  <TextField outlined bind:value={magnetlink}>
+    <div slot="prepend">
+      <Icon path={iconLink} />
+    </div>
+    magnet link
+  </TextField>
+  <Button depressed on:click={onMagnetLinkClick}>Add</Button>
 
 </Dialog>
 
