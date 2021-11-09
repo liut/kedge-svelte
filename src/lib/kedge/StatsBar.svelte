@@ -87,12 +87,8 @@
 
 <Dialog class="pa-4 text-center" bind:active={isAddingDialog}>
   <TextField outlined bind:value={savePath}>
-    save path
+    save path(optional)
   </TextField>
-  <Button outlined on:click={() => {fileInput.click();}}>
-    add a file
-  </Button>
-  <input style="display:none" type="file" accept=".torrent" on:change={(e)=>onFileSelected(e)} bind:this={fileInput} >
 
   <TextField outlined bind:value={magnetlink}>
     <div slot="prepend">
@@ -100,7 +96,13 @@
     </div>
     magnet link
   </TextField>
-  <Button depressed on:click={onMagnetLinkClick}>Add</Button>
+  <Button depressed on:click={onMagnetLinkClick}>Add magnet</Button>
+
+
+  <Button outlined on:click={() => {fileInput.click();}}>
+    or add a file
+  </Button>
+  <input style="display:none" type="file" accept=".torrent" on:change={(e)=>onFileSelected(e)} bind:this={fileInput} >
 
 </Dialog>
 
