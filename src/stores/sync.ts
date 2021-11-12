@@ -12,19 +12,19 @@ let v: { onupdate?: any; };
 function formatStatus(state: number) : string {
   switch (state) {
     case 0:
-      return 'waiting'
+      return 'W' // waiting
     case 1:
     case 7:
-      return 'checking';
+      return 'C'; // checking
     case 6:
-      return 'allocating';
+      return 'A'; // allocating
     case 2:
     case 3:
-      return 'downloading';
+      return 'D'; // downloading
     case 4:
-      return 'finished';
+      return 'F'; // finished
     case 5:
-      return 'uploading';
+      return 'U'; // uploading
     default:
       return '(' + state + ')';
   }
