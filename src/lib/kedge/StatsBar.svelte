@@ -70,8 +70,8 @@
   <Chip class="ma-1"><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
   <Chip class="ma-1"><span title="queued bytes">Q: {utils.formatBytes(stats.bytesQueued || 0)}</span></Chip>
   <Chip class="ma-1"><span title="wasted bytes">W: {utils.formatBytes(stats.bytesWasted || 0)}</span></Chip>
-  <Chip class="ma-1"><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}</span></Chip>
-  <Chip class="ma-1"><span title="upload rate">S: {utils.formatBytes(stats.rateSent || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}/s</span></Chip>
+  <Chip class="ma-1"><span title="upload rate">S: {utils.formatBytes(stats.rateSent || 0)}/s</span></Chip>
 
 {:else}
   loading...
