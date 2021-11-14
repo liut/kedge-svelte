@@ -80,7 +80,9 @@
 	</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
-	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}
+		{utils.formatBytes(task.download_rate || 0)}/s
+		{utils.formatBytes(task.upload_rate || 0)}/s</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{#if task.num_connections}
 		 <Button text on:click={e => showPeersDialog(task)}>{task.num_peers || 0} ({task.num_connections || 0})</Button>
 	{:else}
@@ -114,6 +116,7 @@
 </Dialog>
 
 <Dialog class="pa-2" bind:active={isTaskFilesDialog}>
+	<p class="text--secondary">{currTask.save_path}/{currTask.name}, files:</p>
 	{#await files}
 	<p>...waiting</p>
 	{:then files}
