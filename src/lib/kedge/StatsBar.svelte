@@ -1,19 +1,24 @@
 <script lang="ts">
-	import { Row, Col } from 'svelte-materialify/src/components/Grid';
-	import Chip from 'svelte-materialify/src/components/Chip/Chip.svelte';
-	import Badge from 'svelte-materialify/src/components/Badge/Badge.svelte';
-	import Button from 'svelte-materialify/src/components/Button/Button.svelte';
-	import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte';
-	import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
-	import TextField from 'svelte-materialify/src/components/TextField/TextField.svelte';
-	import iconFileUpload from '$lib/icons/file-upload';
-	import iconLink from '$lib/icons/link';
-	import FaDownload from '$lib/icons/FaDownload.svelte';
-	import FaUpload from '$lib/icons/FaUpload.svelte';
-	import * as api from '$lib/api';
+  import { Row, Col } from 'svelte-materialify/src/components/Grid';
+  import Chip from 'svelte-materialify/src/components/Chip/Chip.svelte';
+  import Badge from 'svelte-materialify/src/components/Badge/Badge.svelte';
+  import Button from 'svelte-materialify/src/components/Button/Button.svelte';
+  import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte';
+  import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
+  import TextField from 'svelte-materialify/src/components/TextField/TextField.svelte';
+  import iconFileUpload from '$lib/icons/file-upload';
+  import iconLink from '$lib/icons/link';
+  import FaDownload from '$lib/icons/FaDownload.svelte';
+  import FaUpload from '$lib/icons/FaUpload.svelte';
+  import * as api from '$lib/api';
   import utils from '$lib/util';
+  import { onMount } from 'svelte';
 
   export let stats = {};
+
+  onMount(async () => {api.getSessionStats().then((res) => {
+    stats = res;
+  })});
 
   let fileInput;
   let savePath = '';

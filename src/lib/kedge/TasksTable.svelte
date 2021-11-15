@@ -1,14 +1,21 @@
 <script lang="ts">
-	import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte';
-	import Checkbox from 'svelte-materialify/src/components/Checkbox/Checkbox.svelte';
-	import { default as Card, CardTitle, CardText, CardActions } from 'svelte-materialify/src/components/Card';
-	import { Row, Col } from 'svelte-materialify/src/components/Grid';
-	import Button from 'svelte-materialify/src/components/Button/Button.svelte';
-	import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
-	import iconDelete from '$lib/icons/delete';
-	import iconFileTable from '$lib/icons/file-table';
-	import * as api from '$lib/api';
+  import Dialog from 'svelte-materialify/src/components/Dialog/Dialog.svelte';
+  import Checkbox from 'svelte-materialify/src/components/Checkbox/Checkbox.svelte';
+  import { default as Card, CardTitle, CardText, CardActions } from 'svelte-materialify/src/components/Card';
+  import { Row, Col } from 'svelte-materialify/src/components/Grid';
+  import Button from 'svelte-materialify/src/components/Button/Button.svelte';
+  import Icon from 'svelte-materialify/src/components/Icon/Icon.svelte';
+  import iconDelete from '$lib/icons/delete';
+  import iconFileTable from '$lib/icons/file-table';
+  import * as api from '$lib/api';
   import utils from '$lib/util';
+  import { onMount } from 'svelte';
+
+  export let tasks = []
+
+  onMount(async () => {api.getTasks().then((res) => {
+    tasks = res;
+  })});
 
 	let isDeletingDialog = false
 	let isTaskFilesDialog = false
@@ -27,8 +34,6 @@
 		return res
 	}
 	let peers;
-
-  export let tasks = []
 
 	function showDeleteDialog(task:any): void {
 		isDeletingDialog = true
