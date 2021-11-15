@@ -1,6 +1,6 @@
 # kedge-svelte
 
-A Web UI for [Kedge](https://github.com/liut/kedge).
+A Web UI of [Kedge](https://github.com/liut/kedge).
 
 ![screen.png](static/screen-w40.png)
 
