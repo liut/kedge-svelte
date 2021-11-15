@@ -9,34 +9,13 @@ const syncObj = {};
 
 let v: { onupdate?: any; };
 
-function formatStatus(state: number) : string {
-  switch (state) {
-    case 0:
-      return 'W' // waiting
-    case 1:
-    case 7:
-      return 'C'; // checking
-    case 6:
-      return 'A'; // allocating
-    case 2:
-    case 3:
-      return 'D'; // downloading
-    case 4:
-      return 'F'; // finished
-    case 5:
-      return 'U'; // uploading
-    default:
-      return '(' + state + ')';
-  }
-}
-
 function formatTasks(tasks) : void {
   if (!tasks) return;
   tasks.map((t : unknown) : void => {
     t.prettyTotal = utils.formatBytes(t.total_wanted);
     t.prettyCompleted = utils.formatBytes(t.total_done);
     t.prettyRateRecv = utils.formatBytes(t.rates);
-    t.syncStatus = formatStatus(t.state);
+    t.syncStatus = utils.formatStatus(t.state);
   });
 }
 

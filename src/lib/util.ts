@@ -43,5 +43,27 @@ export default {
   formatPecent(x: number|string, d = 2): number {
     if (typeof x === 'number') return x.toFixed(d);
     return Number.parseFloat(x).toFixed(d);
+  },
+
+  formatStatus(state: number) : string {
+    switch (state) {
+      case 0:
+        return 'W' // waiting
+      case 1:
+      case 7:
+        return 'C'; // checking
+      case 6:
+        return 'A'; // allocating
+      case 2:
+      case 3:
+        return 'D'; // downloading
+      case 4:
+        return 'F'; // finished
+      case 5:
+        return 'U'; // uploading
+      default:
+        return '(' + state + ')';
+    }
   }
+
 }
