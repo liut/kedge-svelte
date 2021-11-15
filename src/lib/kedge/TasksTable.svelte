@@ -78,9 +78,10 @@
 		</Button>
 		{/if}
 	</Col>
-	<Col cols={12} sm={1} md={1} lg={2} class="text-right">{task.prettyCompleted||0}/{task.prettyTotal}</Col>
+	<Col cols={12} sm={1} md={1} lg={2} class="text-right">
+		{utils.formatBytes(task.total_done||0)}/{utils.formatBytes(task.total_wanted||0)}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
-	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{task.syncStatus}
+	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{utils.formatStatus(task.state)}
 		{utils.formatBytes(task.download_rate || 0)}/s
 		{utils.formatBytes(task.upload_rate || 0)}/s</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{#if task.num_connections}
