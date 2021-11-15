@@ -2,7 +2,7 @@
 
 A webui for Kedge.
 
-![screen.png](static/screen-w39.png)
+![screen.png](static/screen-w40.png)
 
 ## Features
 
