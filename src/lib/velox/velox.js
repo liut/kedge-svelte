@@ -211,7 +211,7 @@ class Velox {
       this.id = update.id;
     }
     if (!update.body || !this.obj) {
-      this.onerror('null objects');
+      this.onerror(event, 'null objects');
       return;
     }
     //perform update
@@ -245,7 +245,7 @@ class Velox {
       this.disconnect();
     }
   }
-  connerror(err) {
+  connerror(event, err) {
     if (this.conn && this.conn instanceof root.EventSource) {
       //eventsource has no close event - instead it has its
       //own retry mechanism. lets scrap that and simulate a close,
@@ -254,7 +254,7 @@ class Velox {
       this.connclose();
     } else {
       this.statusCheck();
-      this.onerror(err);
+      this.onerror(event, err);
     }
   }
   wait() {
