@@ -67,16 +67,16 @@
 
   <Chip class="ma-2">I:
     {#if stats.hasIncoming}
-     +
+     ⚇
     {:else}
-     -
+     ⚆
   {/if}</Chip>
-  <Chip class="ma-1"><span title="num peers connected">PC: {stats.numPeersConnected || 0}</span></Chip>
-  <Chip class="ma-1"><span title="num peers half open">PHO: {stats.numPeersHalfOpen || 0}</span></Chip>
-  <Chip class="ma-1"><span title="queued bytes">Q: {utils.formatBytes(stats.bytesQueued || 0)}</span></Chip>
-  <Chip class="ma-1"><span title="wasted bytes">W: {utils.formatBytes(stats.bytesWasted || 0)}</span></Chip>
-  <Chip class="ma-1"><span title="download rate">R: {utils.formatBytes(stats.rateRecv || 0)}/s</span></Chip>
-  <Chip class="ma-1"><span title="upload rate">S: {utils.formatBytes(stats.rateSent || 0)}/s</span></Chip>
+  <Chip class="ma-1"><span title="num peers connected">🆗 {stats.numPeersConnected || 0}</span></Chip>
+  <Chip class="ma-1"><span title="num peers half open">🆖 {stats.numPeersHalfOpen || 0}</span></Chip>
+  <Chip class="ma-1"><span title="queued bytes">🔢 {utils.formatBytes(stats.bytesQueued || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="wasted bytes">🚮 {utils.formatBytes(stats.bytesWasted || 0)}</span></Chip>
+  <Chip class="ma-1"><span title="download rate">⬇️ {utils.formatBytes(stats.rateRecv || 0)}/s</span></Chip>
+  <Chip class="ma-1"><span title="upload rate">⬆️ {utils.formatBytes(stats.rateSent || 0)}/s</span></Chip>
 
 {:else}
   loading...
