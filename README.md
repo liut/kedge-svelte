@@ -9,13 +9,13 @@ A webui for Kedge.
 * List all torrents
 * Realtime sync stats of torrents
 * Delelet a torrent (with data optional)
-* Post a torrent file to add
+* Post a torrent file or a magnet link to add
 * Show torrent Files and Peers
 
 ## TODO
 
+* <del>Add support magnet link</del>
 * Pause and resume a torrent task
-* Add support magnet link
 * General configurability
 
 ## Developing
