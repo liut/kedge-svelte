@@ -13,7 +13,7 @@ export async function callApi(uri: string, opt?: any = {}): Promise<any> {
 }
 
 export async function getSessionInfo(): Promise<any> {
-  return await callApi('/api/session/info');
+  return await callApi('/api/session');
 }
 
 export async function getSessionStats(): Promise<any> {
