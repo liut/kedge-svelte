@@ -141,15 +141,15 @@
 	<Row class="text--secondary" dense>
 		<Col>host:port</Col>
 		<Col>client</Col>
-		<Col>progress</Col>
-		<Col>rates</Col>
+		<Col lg={1}>percent</Col>
+		<Col lg={3} class="text-center">rates</Col>
 	</Row>
 	{#each peers as peer}
 		<Row class="text--secondary" dense>
 		 <Col>{peer.ip}:{peer.port}</Col>
 		 <Col>{peer.client||'unknown'}</Col>
-		 <Col>{utils.formatPecent(peer.progress/10000, 0)}%</Col>
-		 <Col>⇣{utils.formatBytes(peer.down_speed)}/s ⇡{utils.formatBytes(peer.up_speed)}/s</Col>
+		 <Col lg={1}>{utils.formatPecent(peer.progress/10000, 0)}%</Col>
+		 <Col lg={3} class="text-right">⇣{utils.formatBytes(peer.down_speed)}/s ⇡{utils.formatBytes(peer.up_speed)}/s</Col>
 		</Row>
 	{/each}
 	{:catch error}
