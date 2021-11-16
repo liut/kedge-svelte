@@ -87,8 +87,8 @@
 		{utils.formatBytes(task.total_done||0)}/{utils.formatBytes(task.total_wanted||0)}</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-right">{utils.formatPecent(task.progress_ppm/10000)}%</Col>
 	<Col cols={12} sm={1} md={1} lg={2} class="text-center">{utils.formatStatus(task.state)}
-		{utils.formatBytes(task.download_rate || 0)}/s
-		{utils.formatBytes(task.upload_rate || 0)}/s</Col>
+		⇣{utils.formatBytes(task.download_rate || 0)}/s
+		⇡{utils.formatBytes(task.upload_rate || 0)}/s</Col>
 	<Col cols={12} sm={1} md={1} lg={1} class="text-center">{#if task.num_connections}
 		 <Button text on:click={e => showPeersDialog(task)}>{task.num_peers || 0} ({task.num_connections || 0})</Button>
 	{:else}
@@ -134,16 +134,22 @@
 	{/await}
 </Dialog>
 
-<Dialog class="pa-2" width="620" bind:active={isTaskPeersDialog}>
+<Dialog class="pa-2" width="38em" bind:active={isTaskPeersDialog}>
 	{#await peers}
 	<p>...waiting</p>
 	{:then peers}
+	<Row class="text--secondary" dense>
+		<Col>host:port</Col>
+		<Col>client</Col>
+		<Col>progress</Col>
+		<Col>rates</Col>
+	</Row>
 	{#each peers as peer}
 		<Row class="text--secondary" dense>
 		 <Col>{peer.ip}:{peer.port}</Col>
-		 <Col>{peer.client}</Col>
+		 <Col>{peer.client||'unknown'}</Col>
 		 <Col>{utils.formatPecent(peer.progress/10000, 0)}%</Col>
-		 <Col>d{utils.formatBytes(peer.down_speed)} u{utils.formatBytes(peer.up_speed)}</Col>
+		 <Col>⇣{utils.formatBytes(peer.down_speed)}/s ⇡{utils.formatBytes(peer.up_speed)}/s</Col>
 		</Row>
 	{/each}
 	{:catch error}
