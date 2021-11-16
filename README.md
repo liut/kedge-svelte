@@ -2,7 +2,11 @@
 
 A Web UI of [Kedge](https://github.com/liut/kedge), build on [Svelte](https://svelte.dev/).
 
+### Main screen
 ![screen.png](static/screen-w40.png)
+
+### Show Peers List
+![screen-peers.png](static/screen-peers-w40.png)
 
 ## Features
 
